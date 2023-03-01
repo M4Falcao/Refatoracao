@@ -10,28 +10,16 @@ namespace refatoracao.Aula01.R01.ExtractMethod.antes
     {
         void Imprimir()
         {
-            Pedido pedido = NovoPedido();
+            decimal total = 0.0m;
+            var pedido = new Pedido("José da Silva");
+            pedido.AddItem("Dentozap", 2, 10m, 0m, 3m);
+            pedido.AddItem("Voldax", 3, 10m, 0m, 3m);
+            pedido.AddItem("Tranlab", 7, 10m, 0m, 3m);
 
-            decimal total = ImprimirItens(pedido);
-
-            ImprimirDetalhes(pedido, total);
-        }
-
-        private static void ImprimirDetalhes(Pedido pedido, decimal total)
-        {
-            Console.WriteLine("*****************************");
-            Console.WriteLine("********** Resumo************");
-            Console.WriteLine("*****************************");
-            Console.WriteLine("nome: " + pedido.Cliente);
-            Console.WriteLine("valor: " + total);
-        }
-
-        private static decimal ImprimirItens(Pedido pedido)
-        {
+            // imprimir itens
             Console.WriteLine("*****************************");
             Console.WriteLine("********** Itens ************");
             Console.WriteLine("*****************************");
-            decimal total = 0.0m;
             foreach (var item in pedido.Itens)
             {
                 decimal valorItem = item.Quantidade * item.PrecoBase;
@@ -39,16 +27,12 @@ namespace refatoracao.Aula01.R01.ExtractMethod.antes
                 total = total + valorItem;
             }
 
-            return total;
-        }
-
-        private static Pedido NovoPedido()
-        {
-            var pedido = new Pedido("José da Silva");
-            pedido.AddItem("Dentozap", 2, 10m, 0m, 3m);
-            pedido.AddItem("Voldax", 3, 10m, 0m, 3m);
-            pedido.AddItem("Tranlab", 7, 10m, 0m, 3m);
-            return pedido;
+            // imprimir detalhes
+            Console.WriteLine("*****************************");
+            Console.WriteLine("********** Resumo************");
+            Console.WriteLine("*****************************");
+            Console.WriteLine("nome: " + pedido.Cliente);
+            Console.WriteLine("valor: " + total);
         }
     }
 
